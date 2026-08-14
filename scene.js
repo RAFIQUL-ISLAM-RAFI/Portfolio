@@ -92,7 +92,16 @@
   const glassMesh = new THREE.Mesh(glassGeo, glassMat);
   coreGroup.add(glassMesh);
 
-  coreGroup.position.set(2.2, 0, 0);
+  coreGroup.position.set(3.4, 0, 0);
+  // Shrink the whole core (icosahedrons + orbiting nodes, since nodeGroup
+  // is a child of coreGroup) so it reads as a smaller accent object that
+  // clears the centered photo card.
+  coreGroup.scale.setScalar(isMobile ? 0.5 : 0.56);
+  // The camera re-aims at the core group every frame (see animate() below),
+  // so shifting only coreGroup.position would keep it centered on screen.
+  // We instead offset the look-at target to the left of the core so the
+  // object itself renders further toward the right edge of the hero.
+  const lookOffsetX = isMobile ? 2.5 : 5.1;
 
   /* ---------- Orbiting nodes (developer symbols as small octa) ---------- */
   const nodeGroup = new THREE.Group();
@@ -175,7 +184,11 @@
       particles.rotation.y = t * 0.015;
       camera.position.x += (mouseX * 0.6 - camera.position.x) * 0.02;
       camera.position.y += (-mouseY * 0.4 - camera.position.y) * 0.02;
-      camera.lookAt(coreGroup.position);
+      camera.lookAt(
+        coreGroup.position.x - lookOffsetX,
+        coreGroup.position.y,
+        coreGroup.position.z
+      );
     } else {
       coreGroup.rotation.y = 0.4;
       coreGroup.rotation.x = 0.15;
