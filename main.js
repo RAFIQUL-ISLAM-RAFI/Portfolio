@@ -67,12 +67,14 @@
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
     mobileMenu.classList.toggle('is-open', !expanded);
+    document.body.classList.toggle('menu-open', !expanded);
   });
 
   document.querySelectorAll('.mobile-link').forEach((link) => {
     link.addEventListener('click', () => {
       navToggle.setAttribute('aria-expanded', 'false');
       mobileMenu.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
     });
   });
 
