@@ -1,0 +1,352 @@
+/* =========================================================
+   SMART TAILORING BUSINESS MANAGEMENT SYSTEM
+   Database: TailoringShopDB
+   ========================================================= */
+
+
+/* =========================================================
+   1. CREATE DATABASE
+   ========================================================= */
+
+CREATE DATABASE TailoringShopDB;
+GO
+
+USE TailoringShopDB;
+GO
+
+
+/* =========================================================
+   2. CREATE TABLES
+   ========================================================= */
+
+CREATE TABLE Customer (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    address VARCHAR(200),
+    phone_no VARCHAR(20)
+);
+GO
+
+
+CREATE TABLE Order_status (
+    status_id INT PRIMARY KEY,
+    status_name VARCHAR(50) NOT NULL
+);
+GO
+
+
+CREATE TABLE Employee (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    specialization VARCHAR(100),
+    salary DECIMAL(10,2)
+);
+GO
+
+
+CREATE TABLE Fabric (
+    fabric_id INT PRIMARY KEY,
+    fabric_name VARCHAR(100) NOT NULL,
+    type VARCHAR(50),
+    unit VARCHAR(20),
+    price_per_unit DECIMAL(10,2),
+    stock_quantity INT
+);
+GO
+
+
+CREATE TABLE Design (
+    design_id INT PRIMARY KEY,
+    design_name VARCHAR(100) NOT NULL,
+    description VARCHAR(255),
+    category VARCHAR(50)
+);
+GO
+
+
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    status_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10,2),
+
+    FOREIGN KEY (customer_id)
+        REFERENCES Customer(customer_id),
+
+    FOREIGN KEY (status_id)
+        REFERENCES Order_status(status_id)
+);
+GO
+
+
+CREATE TABLE Order_item (
+    order_item_id INT PRIMARY KEY,
+    order_id INT,
+    design_id INT,
+    fabric_id INT,
+    quantity INT,
+    price DECIMAL(10,2),
+
+    FOREIGN KEY (order_id)
+        REFERENCES Orders(order_id),
+
+    FOREIGN KEY (design_id)
+        REFERENCES Design(design_id),
+
+    FOREIGN KEY (fabric_id)
+        REFERENCES Fabric(fabric_id)
+);
+GO
+
+
+CREATE TABLE Payment (
+    payment_id INT PRIMARY KEY,
+    order_id INT,
+    amount DECIMAL(10,2),
+    payment_date DATE,
+    payment_method VARCHAR(50),
+    payment_status VARCHAR(50),
+
+    FOREIGN KEY (order_id)
+        REFERENCES Orders(order_id)
+);
+GO
+
+
+CREATE TABLE Delivery (
+    delivery_id INT PRIMARY KEY,
+    order_id INT,
+    delivery_date DATE,
+    delivery_man VARCHAR(100),
+    address VARCHAR(200),
+    status VARCHAR(50),
+
+    FOREIGN KEY (order_id)
+        REFERENCES Orders(order_id)
+);
+GO
+
+
+CREATE TABLE Measurement (
+    measurement_id INT PRIMARY KEY,
+    customer_id INT,
+    employee_id INT,
+    waist DECIMAL(5,2),
+    sleeve DECIMAL(5,2),
+    length DECIMAL(5,2),
+    neck DECIMAL(5,2),
+    shoulder DECIMAL(5,2),
+    chest DECIMAL(5,2),
+    notes VARCHAR(255),
+
+    FOREIGN KEY (customer_id)
+        REFERENCES Customer(customer_id),
+
+    FOREIGN KEY (employee_id)
+        REFERENCES Employee(employee_id)
+);
+GO
+
+
+/* =========================================================
+   3. INSERT DATA
+   ========================================================= */
+
+
+/* ---------- Customer ---------- */
+
+INSERT INTO Customer VALUES
+(1,'Rahim Ahmed','Dhaka','01711111111'),
+(2,'Karim Hasan','Chittagong','01722222222'),
+(3,'Nusrat Jahan','Sylhet','01733333333'),
+(4,'Tanvir Islam','Rajshahi','01744444444'),
+(5,'Ayesha Akter','Khulna','01755555555'),
+(6,'Sabbir Hossain','Barisal','01766666666'),
+(7,'Mim Akter','Rangpur','01777777777'),
+(8,'Fahim Chowdhury','Comilla','01788888888'),
+(9,'Rifat Hasan','Mymensingh','01799999999'),
+(10,'Jannat Islam','Dhaka','01811111111'),
+(11,'Rakib Ahmed','Gazipur','01822222222'),
+(12,'Priya Sultana','Narsingdi','01833333333'),
+(13,'Mehedi Hasan','Noakhali','01844444444');
+GO
+
+
+/* ---------- Order Status ---------- */
+
+INSERT INTO Order_status VALUES
+(1,'Pending'),
+(2,'Confirmed'),
+(3,'Processing'),
+(4,'Cutting'),
+(5,'Stitching'),
+(6,'Ironing'),
+(7,'Ready'),
+(8,'Delivered'),
+(9,'Cancelled'),
+(10,'On Hold'),
+(11,'Packing'),
+(12,'Shipping'),
+(13,'Completed');
+GO
+
+
+/* ---------- Employee ---------- */
+
+INSERT INTO Employee VALUES
+(1,'Jamal Uddin','01911111111','Tailor',25000.00),
+(2,'Kamal Hossain','01922222222','Designer',30000.00),
+(3,'Sohan Ahmed','01933333333','Cutter',22000.00),
+(4,'Rasel Mia','01944444444','Tailor',24000.00),
+(5,'Imran Khan','01955555555','Manager',40000.00),
+(6,'Shila Akter','01966666666','Receptionist',18000.00),
+(7,'Rony Hasan','01977777777','Delivery',17000.00),
+(8,'Nayeem Islam','01988888888','Ironman',16000.00),
+(9,'Mitu Akter','01999999999','Tailor',23000.00),
+(10,'Hasib Ahmed','01611111111','Designer',32000.00),
+(11,'Raihan Islam','01622222222','Tailor',26000.00),
+(12,'Tania Sultana','01633333333','Receptionist',19000.00),
+(13,'Nabil Hasan','01644444444','Delivery',17500.00);
+GO
+
+
+/* ---------- Fabric ---------- */
+
+INSERT INTO Fabric VALUES
+(1,'Cotton White','Cotton','Meter',250.00,100),
+(2,'Silk Red','Silk','Meter',600.00,50),
+(3,'Linen Blue','Linen','Meter',400.00,70),
+(4,'Denim Black','Denim','Meter',500.00,60),
+(5,'Wool Grey','Wool','Meter',700.00,40),
+(6,'Cotton Sky','Cotton','Meter',280.00,120),
+(7,'Silk Green','Silk','Meter',650.00,45),
+(8,'Linen Cream','Linen','Meter',420.00,65),
+(9,'Denim Navy','Denim','Meter',550.00,55),
+(10,'Velvet Maroon','Velvet','Meter',850.00,30),
+(11,'Cotton Yellow','Cotton','Meter',260.00,90),
+(12,'Silk Purple','Silk','Meter',680.00,35),
+(13,'Linen Brown','Linen','Meter',430.00,75);
+GO
+
+
+/* ---------- Design ---------- */
+
+INSERT INTO Design VALUES
+(1,'Panjabi Classic','Simple Panjabi','Mens Wear'),
+(2,'Sherwani Royal','Wedding Sherwani','Mens Wear'),
+(3,'Kurti Floral','Printed Kurti','Womens Wear'),
+(4,'Blazer Modern','Formal Blazer','Mens Wear'),
+(5,'Lehenga Style','Bridal Lehenga','Womens Wear'),
+(6,'Kids Frock','Colorful Frock','Kids Wear'),
+(7,'Polo Shirt','Casual Polo','Mens Wear'),
+(8,'Office Shirt','Formal Shirt','Mens Wear'),
+(9,'Party Gown','Luxury Gown','Womens Wear'),
+(10,'Jeans Pant','Slim Fit Jeans','Mens Wear'),
+(11,'Hoodie Style','Winter Hoodie','Unisex'),
+(12,'Salwar Kameez','Traditional Dress','Womens Wear'),
+(13,'Jacket Premium','Winter Jacket','Unisex');
+GO
+
+
+/* ---------- Orders ----------
+   FIXED:
+   Original report had 6 values but Orders has 5 columns.
+   status text was removed because status_id already stores status.
+*/
+
+INSERT INTO Orders
+(order_id, customer_id, status_id, order_date, total_amount)
+VALUES
+(1,1,1,'2026-05-01',2500.00),
+(2,2,2,'2026-05-02',3200.00),
+(3,3,3,'2026-05-03',4500.00),
+(4,4,4,'2026-05-04',5200.00),
+(5,5,5,'2026-05-05',6000.00),
+(6,6,6,'2026-05-06',2800.00),
+(7,7,7,'2026-05-07',3500.00),
+(8,8,8,'2026-05-08',7200.00),
+(9,9,9,'2026-05-09',1500.00),
+(10,10,10,'2026-05-10',4100.00),
+(11,11,11,'2026-05-11',3900.00),
+(12,12,12,'2026-05-12',4700.00),
+(13,13,13,'2026-05-13',8000.00);
+GO
+
+
+/* ---------- Order Item ---------- */
+
+INSERT INTO Order_item VALUES
+(1,1,1,1,2,2500.00),
+(2,2,2,2,1,3200.00),
+(3,3,3,3,3,4500.00),
+(4,4,4,4,2,5200.00),
+(5,5,5,5,1,6000.00),
+(6,6,6,6,2,2800.00),
+(7,7,7,7,1,3500.00),
+(8,8,8,8,2,7200.00),
+(9,9,9,9,1,1500.00),
+(10,10,10,10,2,4100.00),
+(11,11,11,11,1,3900.00),
+(12,12,12,12,2,4700.00),
+(13,13,13,13,1,8000.00);
+GO
+
+
+/* ---------- Payment ---------- */
+
+INSERT INTO Payment VALUES
+(1,1,2500.00,'2026-05-01','Cash','Paid'),
+(2,2,3200.00,'2026-05-02','Bkash','Paid'),
+(3,3,4500.00,'2026-05-03','Nagad','Pending'),
+(4,4,5200.00,'2026-05-04','Card','Paid'),
+(5,5,6000.00,'2026-05-05','Cash','Pending'),
+(6,6,2800.00,'2026-05-06','Bkash','Paid'),
+(7,7,3500.00,'2026-05-07','Nagad','Paid'),
+(8,8,7200.00,'2026-05-08','Card','Paid'),
+(9,9,1500.00,'2026-05-09','Cash','Refunded'),
+(10,10,4100.00,'2026-05-10','Bkash','Pending'),
+(11,11,3900.00,'2026-05-11','Nagad','Paid'),
+(12,12,4700.00,'2026-05-12','Card','Paid'),
+(13,13,8000.00,'2026-05-13','Cash','Paid');
+GO
+
+
+/* ---------- Delivery ---------- */
+
+INSERT INTO Delivery VALUES
+(1,1,'2026-05-03','Rony','Dhaka','Pending'),
+(2,2,'2026-05-04','Nabil','Chittagong','Delivered'),
+(3,3,'2026-05-05','Rony','Sylhet','Processing'),
+(4,4,'2026-05-06','Nabil','Rajshahi','On The Way'),
+(5,5,'2026-05-07','Rony','Khulna','Pending'),
+(6,6,'2026-05-08','Nabil','Barisal','Delivered'),
+(7,7,'2026-05-09','Rony','Rangpur','Delivered'),
+(8,8,'2026-05-10','Nabil','Comilla','Delivered'),
+(9,9,'2026-05-11','Rony','Mymensingh','Cancelled'),
+(10,10,'2026-05-12','Nabil','Dhaka','Pending'),
+(11,11,'2026-05-13','Rony','Gazipur','Processing'),
+(12,12,'2026-05-14','Nabil','Narsingdi','On The Way'),
+(13,13,'2026-05-15','Rony','Noakhali','Delivered');
+GO
+
+
+/* ---------- Measurement ---------- */
+
+INSERT INTO Measurement VALUES
+(1,1,1,32.50,22.00,40.00,15.50,18.00,38.00,'Regular Fit'),
+(2,2,2,34.00,23.00,41.00,16.00,18.50,39.00,'Slim Fit'),
+(3,3,3,30.00,21.50,39.00,15.00,17.50,36.00,'Loose Fit'),
+(4,4,4,36.00,24.00,42.00,16.50,19.00,40.00,'Party Wear'),
+(5,5,5,38.00,25.00,43.00,17.00,19.50,42.00,'Wedding Dress'),
+(6,6,6,28.00,20.00,37.00,14.50,17.00,35.00,'Kids Size'),
+(7,7,7,33.00,22.50,40.50,15.50,18.00,38.50,'Comfort Fit'),
+(8,8,8,35.00,23.50,41.50,16.00,18.50,39.50,'Formal Wear'),
+(9,9,9,31.00,21.00,38.50,15.00,17.50,37.00,'Casual'),
+(10,10,10,37.00,24.50,42.50,16.50,19.00,41.00,'Premium Fit'),
+(11,11,11,32.00,22.00,40.00,15.50,18.00,38.00,'Office Wear'),
+(12,12,12,29.00,20.50,37.50,14.50,17.00,35.50,'Traditional'),
+(13,13,13,39.00,25.50,43.50,17.50,20.00,43.00,'Winter Jacket');
+GO
+
