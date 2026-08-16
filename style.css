@@ -238,6 +238,13 @@ h1,h2,h3,h4{ font-family: var(--font-display); font-weight:600; letter-spacing:-
   font-family:var(--font-display); font-weight:700; font-size:.85rem;
   background: var(--grad-main); color:#04060c;
 }
+.nav-brand-mark img {
+    width: 50px;
+    height: 38.5px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    object-fit: cover;
+}
 .nav-brand-name{ font-family:var(--font-display); font-weight:600; font-size:1.02rem; }
 .nav-brand-name .dot{ color:var(--cyan-ink); }
 
