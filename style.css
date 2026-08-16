@@ -238,13 +238,6 @@ h1,h2,h3,h4{ font-family: var(--font-display); font-weight:600; letter-spacing:-
   font-family:var(--font-display); font-weight:700; font-size:.85rem;
   background: var(--grad-main); color:#04060c;
 }
-.nav-brand-mark img {
-    width: 50px;
-    height: 38.5px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    object-fit: cover;
-}
 .nav-brand-name{ font-family:var(--font-display); font-weight:600; font-size:1.02rem; }
 .nav-brand-name .dot{ color:var(--cyan-ink); }
 
@@ -848,15 +841,15 @@ h1,h2,h3,h4{ font-family: var(--font-display); font-weight:600; letter-spacing:-
    THEME: LIGHT
 ========================================================= */
 [data-theme="light"]{
-  --bg:            #F5F6FB;
-  --bg-elevated:   #FFFFFF;
-  --bg-elevated-2: #ECEEF7;
-  --glass:         rgba(10,12,25,0.04);
-  --glass-strong:  rgba(10,12,25,0.07);
-  --glass-border:  rgba(10,12,25,0.11);
-  --text:       #12131C;
-  --text-dim:   #4B5069;
-  --text-faint: #6E7391;
+  --bg:            #EFEEE7;
+  --bg-elevated:   #F7F6F0;
+  --bg-elevated-2: #E7E5DB;
+  --glass:         rgba(30,28,20,0.045);
+  --glass-strong:  rgba(30,28,20,0.08);
+  --glass-border:  rgba(30,28,20,0.13);
+  --text:       #1C1B16;
+  --text-dim:   #55523F;
+  --text-faint: #78745D;
 
   /* Darker, higher-contrast accent colors for text/labels on a light
      background — the base --cyan/--blue/--purple are tuned for dark
@@ -870,14 +863,14 @@ h1,h2,h3,h4{ font-family: var(--font-display); font-weight:600; letter-spacing:-
 [data-theme="light"] .bg-noise{ opacity:.02; }
 [data-theme="light"] .bg-grid{
   background-image:
-    linear-gradient(rgba(10,12,25,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(10,12,25,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(30,28,20,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,28,20,0.05) 1px, transparent 1px);
 }
 [data-theme="light"] .navbar.is-scrolled{
-  background: rgba(255,255,255,0.78);
+  background: rgba(239,238,231,0.82);
 }
 [data-theme="light"] .mobile-menu{
-  background: rgba(255,255,255,0.98);
+  background: rgba(247,246,240,0.98);
 }
 [data-theme="light"] .cursor-glow{
   background: radial-gradient(circle, rgba(91,127,255,0.08), transparent 65%);
