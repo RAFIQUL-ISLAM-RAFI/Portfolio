@@ -714,6 +714,13 @@ h1,h2,h3,h4{ font-family: var(--font-display); font-weight:600; letter-spacing:-
   box-shadow: 0 0 60px -6px rgba(91,127,255,.6), inset 0 0 24px rgba(62,232,255,.2);
   animation: floaty 5s ease-in-out infinite;
 }
+.core-center img {
+    width: 100px;
+    height: 102px;
+    border: 2px solid #fff;
+    border-radius: 50%;box-shadow: 1px 1px 40px navy;
+    object-fit: cover;
+}
 .core-center span{ font-family:var(--font-display); font-weight:700; background: var(--grad-text); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .core-node{
   position:absolute; top:50%; left:50%; width:64px; height:64px; margin:-32px 0 0 -32px;
