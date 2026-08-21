@@ -583,6 +583,52 @@ h1,h2,h3,h4{ font-family: var(--font-display); font-weight:600; letter-spacing:-
 }
 @media (max-width: 700px){ .extracurricular-grid{ grid-template-columns:1fr; } }
 
+.extracurricular-item--cert{
+  align-items:center; justify-content:space-between; flex-wrap:wrap;
+}
+.extracurricular-item--cert > span:nth-child(2){ flex:1 1 auto; }
+
+.cert-view-btn{
+  flex-shrink:0; font-family:var(--font-mono); font-size:.72rem; font-weight:600;
+  letter-spacing:.03em; color:var(--cyan-ink); background:var(--glass-strong);
+  border:1px solid var(--glass-border); border-radius:999px; padding:.4rem .95rem;
+  cursor:pointer; transition: border-color .25s var(--ease), transform .25s var(--ease), color .25s var(--ease);
+}
+.cert-view-btn:hover{ border-color: var(--cyan-ink); color: var(--cyan-ink); transform: translateY(-1px); }
+.cert-view-btn:active{ transform: translateY(0); }
+
+/* =========================================================
+   CERTIFICATE LIGHTBOX
+========================================================= */
+.cert-modal{
+  position:fixed; inset:0; z-index:999; display:flex; align-items:center; justify-content:center;
+  padding: 4vh 4vw; opacity:0; pointer-events:none; transition: opacity .3s var(--ease);
+}
+.cert-modal.is-open{ opacity:1; pointer-events:auto; }
+.cert-modal-backdrop{
+  position:absolute; inset:0; background: rgba(3,4,9,0.82); backdrop-filter: blur(6px);
+}
+[data-theme="light"] .cert-modal-backdrop{ background: rgba(20,18,12,0.6); }
+.cert-modal-box{
+  position:relative; max-width:min(880px, 92vw); max-height:88vh;
+  background: var(--bg-elevated); border:1px solid var(--glass-border); border-radius: var(--radius-md);
+  padding: 1rem; box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+  transform: scale(.94) translateY(10px); transition: transform .3s var(--ease);
+}
+.cert-modal.is-open .cert-modal-box{ transform: scale(1) translateY(0); }
+.cert-modal-img{
+  display:block; max-width:100%; max-height:80vh; border-radius: var(--radius-sm); margin:0 auto;
+}
+.cert-modal-close{
+  position:absolute; top:-14px; right:-14px; width:34px; height:34px; border-radius:50%;
+  background: var(--grad-main); color:#fff; border:none; font-size:1.3rem; line-height:1;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+@media (max-width: 500px){
+  .cert-modal-close{ top:-10px; right:-10px; width:30px; height:30px; font-size:1.1rem; }
+}
+
 /* =========================================================
    PROJECTS
 ========================================================= */
