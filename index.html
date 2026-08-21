@@ -261,9 +261,10 @@
           <span class="extracurricular-dot"></span>
           <span>Selected for the First Round of English Olympiad &amp; Champion in Carrom (Indoor Games Segment) (2018) — South Asiatic School and College</span>
         </div>
-        <div class="extracurricular-item reveal-up">
+        <div class="extracurricular-item extracurricular-item--cert reveal-up">
           <span class="extracurricular-dot"></span>
-          <span>Teamwise Runner-Up—DevFront Contest UAP (SNH) 
+          <span>Teamwise Runner-Up—DevFront Contest UAP (SNH)</span>
+          <button type="button" class="cert-view-btn" data-cert-src="Certificate.png" data-cert-alt="DevFront Contest UAP Runner-Up Certificate">View</button>
         </div>
       </div>
     </div>
@@ -401,11 +402,11 @@
         <div class="project-card tilt-card reveal-up">
           <div class="project-card-glow"></div>
           <div class="project-card-tags">
-            <span>Javascript</span><span>CSS</span><span>HTML</span><span>PLpgSQL</span>
+            <span>Java</span>
           </div>
           <h3>Parking Management System</h3>
           <p>A Java application built to manage vehicle parking operations, developed as an academic project.</p>
-          <a href="https://github.com/RAFIQUL-ISLAM-RAFI/SmartPark" target="_blank" rel="noopener noreferrer" class="project-card-link">View on GitHub →</a>
+          <a href="https://github.com/RAFIQUL-ISLAM-RAFI/Parking-Management-System" target="_blank" rel="noopener noreferrer" class="project-card-link">View on GitHub →</a>
         </div>
 
         <div class="project-card tilt-card reveal-up">
@@ -535,7 +536,7 @@
           <a href="mailto:md.rafiqulis.rafi@gmail.com" class="btn btn--primary btn--lg magnetic">
             <span>Get In Touch</span>
           </a>
-          <a href="Rafi_CV.pdf" download class="btn btn--ghost btn--lg magnetic">
+          <a href="Rafi_Developer_CV.pdf" download class="btn btn--ghost btn--lg magnetic">
             <span>Download Resume</span>
           </a>
         </div>
@@ -576,6 +577,15 @@
   </div>
   <p class="footer-copy">© 2026 MD. Rafiqul Islam Rafi. All rights reserved.</p>
 </footer>
+
+<!-- ===== Certificate Lightbox ===== -->
+<div class="cert-modal" id="certModal" aria-hidden="true">
+  <div class="cert-modal-backdrop" data-cert-close></div>
+  <div class="cert-modal-box" role="dialog" aria-modal="true" aria-label="Certificate preview">
+    <button type="button" class="cert-modal-close" data-cert-close aria-label="Close">&times;</button>
+    <img class="cert-modal-img" id="certModalImg" src="" alt="">
+  </div>
+</div>
 
 <!-- ===== Scripts ===== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
