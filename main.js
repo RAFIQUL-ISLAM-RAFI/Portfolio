@@ -322,6 +322,48 @@
   })();
 
   /* ============================================================
+     Certificate lightbox (View button on extracurricular items)
+  ============================================================ */
+  (function initCertModal() {
+    const modal = document.getElementById('certModal');
+    const modalImg = document.getElementById('certModalImg');
+    if (!modal || !modalImg) return;
+
+    let lastFocused = null;
+
+    function openModal(src, alt) {
+      lastFocused = document.activeElement;
+      modalImg.src = src;
+      modalImg.alt = alt || 'Certificate';
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-open');
+      modalImg.src = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('.cert-view-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openModal(btn.dataset.certSrc, btn.dataset.certAlt);
+      });
+    });
+
+    modal.querySelectorAll('[data-cert-close]').forEach((el) => {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+  })();
+
+  /* ============================================================
      Hero typed-role cycling text
   ============================================================ */
   (function initTypedText() {
